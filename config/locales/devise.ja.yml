@@ -2,6 +2,7 @@ ja:
   activerecord:
     attributes:
       user:
+        account: アカウント
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -140,3 +141,6 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: '%{count} 件のエラーが発生したため %{resource} は保存されませんでした。'
+      blank: 'を入力してください'
+      too_long: 'は %{count}文字以内 で入力してください'
+      taken: '%{value} はすでに存在します'
