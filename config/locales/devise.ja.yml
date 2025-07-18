@@ -142,3 +142,5 @@ ja:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: '%{count} 件のエラーが発生したため %{resource} は保存されませんでした。'
       blank: 'を入力してください'
+      too_long: 'は %{count}文字以内 で入力してください'
+      taken: '%{value} はすでに存在します'
