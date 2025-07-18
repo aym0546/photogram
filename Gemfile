@@ -18,8 +18,11 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'devise'
-# gem 'hamlit'
-gem 'haml-rails'
+
+gem 'hamlit'
+gem 'hamlit-rails'
+# gem 'haml-rails'
+
 gem 'annotate'
 gem 'better_errors'
 gem 'binding_of_caller'
