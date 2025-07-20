@@ -7,17 +7,17 @@
       = form_with url: '#', html: { id: "avatar-form", enctype: "multipart/form-data" }, local: true do
         = file_field_tag :avatar, id: "avatar-input", style: "display: none;", accept: "image/png,image/jpeg"
     .achievement
-      .posts
+      .block
         .count
           44
         .section
           Posts
-      .followers
+      .block
         .count
           110
         .section
           Followers
-      .following
+      .block
         .count
           44
         .section

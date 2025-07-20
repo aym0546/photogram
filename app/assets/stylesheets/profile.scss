@@ -1,0 +1,49 @@
+@use 'variables';
+
+$image_size: 75px;
+
+.user_info {
+  margin-bottom: 32px;
+
+  .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $image_size * 1.6;
+
+    img {
+      width: $image_size;
+      height: $image_size;
+      border-radius: 50%;
+      object-fit: cover;
+
+      border: 1px solid variables.$pink-dark;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+
+  .achievement {
+    display: flex;
+    justify-content: center;
+
+    .block {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      width: 60px;
+      padding: 20px;
+
+      .count {
+        font-size: variables.$font-lg;
+        margin-bottom: 8px;
+      }
+
+      .section {
+        align-content: center;
+        color: variables.$gray-dark;
+      }
+    }
+  }
+}
