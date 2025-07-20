@@ -1,0 +1,25 @@
+.container
+  .heading
+    = current_user.account
+  .user_info
+    .avatar
+      = image_tag current_user.avatar_img, id: 'avatar-preview'
+      = form_with url: '#', html: { id: "avatar-form", enctype: "multipart/form-data" }, local: true do
+        = file_field_tag :avatar, id: "avatar-input", style: "display: none;", accept: "image/png,image/jpeg"
+    .achievement
+      .posts
+        .count
+          44
+        .section
+          Posts
+      .followers
+        .count
+          110
+        .section
+          Followers
+      .following
+        .count
+          44
+        .section
+          Following
+  .user_posts
