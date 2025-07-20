@@ -1,8 +1,16 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+// Rails のベースライブラリ
+import Rails from "@rails/ujs"
+Rails.start()
+
+// Turbo の読み込み
 import '@hotwired/turbo-rails';
-import './controllers';
+
+// グローバルライブラリ
 import $ from 'jquery';
 import axios from 'axios';
+
+// Stimulus Controllers
+import './controllers';
 
 document.addEventListener('turbo:load', () => {
   // 画像クリック → inputをトリガー
