@@ -7,10 +7,12 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to users_path, notice: 'プロフィール画像が更新されました'
+      # 成功した時、アバター画像の url を返す
+      avatar_url = @user.avatar.attached? ? url_for(@user.avatar) : nil
+      render json: { status: 'ok', user: @user, avatar_url: avatar_url }
     else
-      flash.now[:error] = '更新できませんでした'
-      render :show
+      # 不成功の場合のステータスは 422
+      render json: { status: 'error', errors: @user.errors }, status: :unprocessable_entity
     end
   end
 

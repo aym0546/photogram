@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   # プロフィール表示・更新用のカスタムコントローラ
-  resource :users, only: [:show, :update]
+  resource :user, only: [:show, :update]
 
 end
