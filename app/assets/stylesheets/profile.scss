@@ -21,6 +21,10 @@ $image_size: variables.$avatar-l;
       border-radius: 50%;
       padding: 2px;
     }
+
+    #avatar-input {
+      display: none;
+    }
   }
 
   .achievement {

@@ -6,7 +6,7 @@
       .avatar
         = image_tag current_user.avatar_img, id: 'avatar-preview'
         = form_with url: '#', html: { id: "avatar-form", enctype: "multipart/form-data" }, local: true do
-          = file_field_tag :avatar, id: "avatar-input", style: "display: none;", accept: "image/png,image/jpeg"
+          = file_field_tag :avatar, id: "avatar-input", accept: "image/png,image/jpeg"
       .achievement
         .block
           .count
