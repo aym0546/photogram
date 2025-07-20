@@ -1,0 +1,113 @@
+@use 'variables';
+
+////////////////////////////
+// 上部のナビゲーションサイン //
+////////////////////////////
+
+// 左右共通スタイル
+@mixin nav {
+  position: fixed;
+  top: 15px;
+  z-index: 1000;
+  white-space: nowrap;
+  font-size: variables.$font-lg;
+
+  a {
+    color: variables.$gray-bright;
+
+    &:hover {
+      color: variables.$gray-middle;
+    }
+  }
+}
+
+.nav-right {
+  @include nav;
+  right: 15px;
+}
+
+.nav-left {
+  @include nav;
+  left: 15px;
+}
+
+///////////////////////
+// ページ全体のスタイル //
+///////////////////////
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .card {
+    width: 400px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    // ページタイトル
+    .heading {
+      text-align: center;
+      font-size: variables.$font-lg;
+      margin: 15px 0;
+    }
+
+    // 認証画面のBG画像
+    .bg-img {
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+////////////////////
+// 認証画面のBG画像 //
+////////////////////
+
+#bg-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+///////////
+// ボタン //
+///////////
+
+.btn-primary {
+  background-color: variables.$primary-color;
+  border: none;
+  text-align: center;
+  color: variables.$text-base-color;
+  width: 362px;
+  height: 48px;
+  font-weight: 400;
+  font-family: variables.$base-font;
+  line-height: 100%;
+  letter-spacing: 0px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+///////////////////////
+// devise の下部リンク //
+///////////////////////
+
+.links {
+  margin-top: 20px;
+  line-height: 1.2rem;
+  text-align: right;
+
+  a {
+    font-size: variables.$font-sm;
+    color: variables.$gray-light;
+
+    &:hover {
+      color: variables.$gray-middle;
+    }
+  }
+}

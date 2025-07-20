@@ -1,6 +1,8 @@
 // Entry point for your Sass build
 @use 'reset';
 @use 'variables';
+@use 'form';
+@use 'common';
 @use 'profile';
 
 html {
@@ -26,15 +28,4 @@ body {
 a {
   text-decoration: none;
   color: variables.$text-base-color;
-}
-
-.container {
-  width: 100%;
-  justify-content: center;
-
-  .heading {
-    text-align: center;
-    font-size: variables.$font-lg;
-    margin: 15px 0;
-  }
 }

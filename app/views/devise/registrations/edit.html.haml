@@ -1,40 +1,45 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :account
-    %br/
-    = f.text_field :account, autofocus: true, autocomplete: "Account"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%div
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+-# ユーザー編集画面
+.container
+  .card
+    .bg-img
+      = image_tag 'bg-img.jpg', id: 'bg-img'
+    .form
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .field
+          = f.label :account, 'Acount'
+          %br/
+          = f.text_field :account, autofocus: true, autocomplete: "Account", placeholder: "Account", class: 'text'
+        .field
+          = f.label :email, 'Email'
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email@photogram.com", class: 'text'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .field
+          = f.label :password, 'New Password'
+          %i (leave blank if you don't want to change it)
+          %br/
+          = f.password_field :password, autocomplete: "new-password", placeholder: "NewPassword", class: 'text'
+          - if @minimum_password_length
+            %br/
+            %em
+              = @minimum_password_length
+              characters minimum
+        .field
+          = f.label :password_confirmation, 'New Password'
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "NewPassword", class: 'text'
+        .field
+          = f.label :current_password, 'Current Password'
+          %i (we need your current password to confirm your changes)
+          %br/
+          = f.password_field :current_password, autocomplete: "current-password", placeholder: "CurrentPassword", class: 'text'
+        .actions
+          = f.submit "Update", class: 'btn-primary'
+      .cancel-account
+        %h3 Cancel my account
+        %div
+          Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'btn-primary'}
+      = link_to "Back", :back
