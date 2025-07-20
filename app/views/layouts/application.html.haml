@@ -12,9 +12,23 @@
     %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
     %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => "https://use.typekit.net/byg5sjm.css", :rel => "stylesheet"}/
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body
+
+    .nav-left
+      - if !current_page?(root_path)
+        = link_to (request.referer || root_path) do
+          = image_tag 'path.png', class: 'back'
+
+    .nav-right
+      - if user_signed_in?
+        = link_to 'Log out', destroy_user_session_path, method: :delete
+      - elsif !current_page?(new_user_session_path)
+        = link_to 'Log in', new_user_session_path
+
     %p.notice= notice
     %p.alert= alert
+
     = yield

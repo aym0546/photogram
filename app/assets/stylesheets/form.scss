@@ -1,0 +1,80 @@
+@use 'variables';
+
+// 共通formスタイル
+@mixin form-control($height: 25px) {
+  width: 100%;
+  height: $height;
+  border: none;
+  background-color: variables.$base-bg-color;
+  margin-top: 5px;
+  font-family: variables.$base-font;
+  color: variables.$gray-deep;
+  font-size: variables.$font-lg;
+  box-sizing: border-box;
+}
+
+// input, select 共通
+input,
+select {
+  &.text {
+    @include form-control;
+  }
+
+  ::placeholder {
+    color: variables.$gray-dark;
+  }
+}
+
+textarea {
+  @include form-control(203px);
+  resize: vertical;
+
+  ::placeholder {
+    color: variables.$gray-dark;
+  }
+}
+
+label {
+  font-size: variables.$font-sm;
+  color: variables.$gray-middle;
+}
+
+.form {
+  max-width: 400px;
+  box-sizing: border-box;
+  padding: 20px;
+
+  .field {
+    padding: 12px 0;
+
+    i,
+    em {
+      font-size: variables.$font-sm;
+      color: variables.$gray-bright;
+    }
+
+    & + .field {
+      border-top: 1px solid variables.$gray-dark;
+    }
+  }
+
+  .cancel-account {
+    margin-top: 20px;
+
+    h3 {
+      font-size: variables.$font-sm;
+      color: variables.$gray-bright;
+      margin-bottom: 5px;
+    }
+
+    div {
+      font-size: variables.$font-sm;
+      color: variables.$gray-bright;
+    }
+  }
+
+  button,
+  input[type='submit'] {
+    margin: 20px 0;
+  }
+}

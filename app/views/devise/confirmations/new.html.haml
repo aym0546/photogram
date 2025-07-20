@@ -1,10 +1,15 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+-# ログイン画面
+.container
+  .card
+    .bg-img
+      = image_tag 'bg-img.jpg', id: 'bg-img'
+    .form
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .field
+          = f.label :email, 'Email'
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'text', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+        .actions
+          = f.submit "Resend confirmation instructions", class: 'btn-primary'
+      = render "devise/shared/links"
