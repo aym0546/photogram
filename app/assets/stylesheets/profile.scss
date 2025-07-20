@@ -1,6 +1,6 @@
 @use 'variables';
 
-$image_size: 75px;
+$image_size: variables.$avatar-l;
 
 .user_info {
   margin-bottom: 32px;
