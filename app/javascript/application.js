@@ -1,6 +1,6 @@
 // Rails のベースライブラリ
-import Rails from "@rails/ujs"
-Rails.start()
+import Rails from '@rails/ujs';
+Rails.start();
 
 // Turbo の読み込み
 import '@hotwired/turbo-rails';
@@ -41,11 +41,33 @@ document.addEventListener('turbo:load', () => {
           // 返ってきた avatar_url を使って再描写
           $('#avatar-preview').attr('src', res.data.avatar_url);
         }
-        alert('プロフィール画像を更新しました');
+        flash('プロフィール画像を更新しました');
       })
       .catch((e) => {
         console.error('Upload error', e);
-        alert('アップロードに失敗しました');
+        flash('アップロードに失敗しました');
       });
   });
 });
+
+// flash 表示
+function flash(message, type = 'notice') {
+  const flash = $('.flash');
+
+  // 要素が存在しない場合は何もしない
+  if (flash.length === 0) {
+    console.warn('.flash element is not found');
+    return;
+  }
+
+  // クラスを設定
+  flash.removeClass().addClass(`flash flash-${type}`);
+
+  // メッセージ設定と表示
+  flash.text(message).show();
+
+  // 一定時間後に非表示（3秒）
+  setTimeout(() => {
+    flash.fadeOut(400);
+  }, 3000);
+}

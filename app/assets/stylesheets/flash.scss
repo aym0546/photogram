@@ -1,0 +1,17 @@
+.flash {
+  position: fixed;
+  top: 16px;
+  font-size: 12px;
+  right: 16px;
+  width: 200px;
+  background: white;
+  visibility: hidden;
+  z-index: 1;
+  padding: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
+
+  &.flash-notice,
+  &.flash-alert {
+    visibility: visible;
+  }
+}
