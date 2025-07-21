@@ -1,5 +1,28 @@
-%h1 Timeline
-= image_tag @post.user.avatar
-%p= @post.user.account
-%p= @post.caption
-%p= @post.created_at
+.container
+  .card
+    .post
+      .post-header
+        .avatar-img
+          = image_tag @post.user.avatar
+        .post-info
+          .post-user
+            = @post.user.account
+          .post-ago
+            = "#{time_ago_in_words(@post.created_at)} ago"
+      .post-content
+        .content-images
+      .post-footer
+        .group
+          .sign
+            = image_tag 'heart-blank.svg'
+          .sign
+            = image_tag 'comment.svg'
+          .sign
+            = image_tag 'link.svg'
+        .post-like
+          Jasmine and 12,000 other liked your post
+        .caption
+          .caption-user
+            = @post.user.account
+          .caption-content
+            = @post.caption

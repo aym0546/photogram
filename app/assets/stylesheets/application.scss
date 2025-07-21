@@ -4,6 +4,7 @@
 @use 'flash';
 @use 'form';
 @use 'common';
+@use 'post';
 @use 'profile';
 
 html {
@@ -17,7 +18,8 @@ html {
   font-family: 'poppins', sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 14px;
+  font-size: variables.$font-base;
+  color: variables.$gray-deep;
 }
 
 body {

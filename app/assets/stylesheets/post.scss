@@ -1,0 +1,58 @@
+@use 'variables';
+
+$image_size: variables.$avatar-s;
+
+.post {
+  margin-top: 60px;
+
+  &-header {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+
+    .avatar-img {
+      img {
+        width: $image_size;
+        height: $image_size;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &-info {
+    .post-user {
+      margin-bottom: 5px;
+    }
+    .post-ago {
+      color: variables.$gray-dark;
+      font-size: variables.$font-md;
+    }
+  }
+
+  &-content {
+    .content-images {
+      width: 343px;
+      height: 225px;
+      background-color: skyblue;
+      margin-bottom: 15px;
+    }
+  }
+
+  &-footer {
+    .group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .post-like {
+      font-size: variables.$font-md;
+      margin-bottom: 10px;
+    }
+    .caption {
+      display: flex;
+      font-size: variables.$font-md;
+      gap: 5px;
+    }
+  }
+}
