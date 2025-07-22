@@ -63,8 +63,8 @@
                 .row.g-1
                   - @post.images[3..4].each_with_index do |image, i|
                     .col-6.mb-1
-                      = image_tag(image.variant(resize_to_fill: [150, 303]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 1}" })
-                      = render "modal", image: image, index: i + 1, post_id: @post.id
+                      = image_tag(image.variant(resize_to_fill: [150, 303]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 3}" })
+                      = render "modal", image: image, index: i + 3, post_id: @post.id
 
           - when 6
             .row.g-1.mb-1
@@ -79,8 +79,8 @@
                 .row.g-1
                   - @post.images[2..5].each_with_index do |image, i|
                     .col-3.mb-1
-                      = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 1}" })
-                      = render "modal", image: image, index: i + 1, post_id: @post.id
+                      = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 2}" })
+                      = render "modal", image: image, index: i + 2, post_id: @post.id
 
           - when 7
             .row.g-1.mb-1
@@ -97,8 +97,8 @@
                 .row.g-1
                   - @post.images[3..6].each_with_index do |image, i|
                     .col-3.mb-1
-                      = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 1}" })
-                      = render "modal", image: image, index: i + 1, post_id: @post.id
+                      = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{@post.id}-#{i + 3}" })
+                      = render "modal", image: image, index: i + 3, post_id: @post.id
 
           - when 8
             .row.g-1
