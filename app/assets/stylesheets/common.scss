@@ -38,7 +38,8 @@
 .container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   .card {
     width: 400px;
@@ -90,6 +91,20 @@
 
   &:hover {
     opacity: 0.7;
+  }
+}
+
+.btn-secondary {
+  background-color: variables.$base-bg-color;
+  border: none;
+  // text-align: center;
+  color: variables.$gray-bright;
+  font-weight: 400;
+  font-family: variables.$base-font;
+  font-size: variables.$font-lg;
+
+  &:hover {
+    color: variables.$text-base-color;
   }
 }
 

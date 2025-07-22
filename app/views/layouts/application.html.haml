@@ -20,11 +20,15 @@
     .nav-left
       - if !current_page?(root_path)
         = link_to (request.referer || root_path) do
-          = image_tag 'path.png', class: 'back'
+          = image_tag 'path.svg', class: 'back'
+      - else
+        = link_to (new_post_path) do
+          = image_tag 'camera.svg'
 
     .nav-right
       - if user_signed_in?
-        = link_to 'Log out', destroy_user_session_path, method: :delete
+        -if !current_page?(new_post_path)
+          = link_to 'Log out', destroy_user_session_path, method: :delete
       - elsif !current_page?(new_user_session_path)
         = link_to 'Log in', new_user_session_path
 
