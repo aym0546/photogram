@@ -12,6 +12,8 @@ import axios from 'axios';
 // Stimulus Controllers
 import './controllers';
 
+import * as bootstrap from 'bootstrap';
+
 document.addEventListener('turbo:load', () => {
   // 画像クリック → inputをトリガー
   $('#avatar-preview').on('click', () => {
