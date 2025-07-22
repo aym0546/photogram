@@ -16,4 +16,8 @@
 class Post < ApplicationRecord
   has_many_attached :images
   belongs_to :user
+
+  def url
+    Rails.application.routes.url_helpers.post_url(self, host: "http://localhost:3000")
+  end
 end

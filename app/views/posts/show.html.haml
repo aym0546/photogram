@@ -1,0 +1,30 @@
+.container
+  .card
+    .post
+      .post-header
+        .avatar-img
+          = image_tag @post.user.avatar
+        .post-info
+          .post-user
+            = @post.user.account
+          .post-ago
+            = "#{time_ago_in_words(@post.created_at)} ago"
+      .post-content
+        .content-images
+          = image_tag @post.images[0] if @post.images[0].present?
+      .post-footer
+        .group
+          .sign
+            = image_tag 'heart-blank.svg'
+          .sign
+            = image_tag 'comment.svg'
+          .sign
+            = link_to "https://twitter.com/share?url=#{CGI.escape(@post.url)}&text=#{CGI.escape("【テスト】\n\n#{@post.caption}")}", target: "_blank", rel: "noopener" do
+              = image_tag 'link.svg'
+        .post-like
+          Jasmine and 12,000 other liked your post
+        .caption
+          .caption-user
+            = @post.user.account
+          .caption-content
+            = @post.caption

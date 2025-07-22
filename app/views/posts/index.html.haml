@@ -20,7 +20,8 @@
             .sign
               = image_tag 'comment.svg'
             .sign
-              = image_tag 'link.svg'
+              = link_to "https://twitter.com/share?url=#{CGI.escape(post.url)}&text=#{CGI.escape("【テスト】\n\n#{post.caption}")}", target: "_blank", rel: "noopener" do
+                = image_tag 'link.svg'
           .post-like
             Jasmine and 12,000 other liked your post
           .caption
