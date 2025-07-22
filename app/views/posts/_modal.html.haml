@@ -1,0 +1,7 @@
+.modal.fade{id: "imageModal-#{post_id}-#{index}", tabindex: "-1", role: "dialog", aria: { labelledby: "modalLabel-#{post_id}-#{index}", hidden: true } }
+  .modal-dialog.modal-dialog-centered.modal-xl
+    .modal-content
+      .modal-header
+        %button.btn-close{ type: "button", data: { bs_dismiss: "modal" }, aria: { label: "Close" } }
+      .modal-body.text-center
+        = image_tag(image.variant(resize_to_limit: [900, 900]), alt: "large image #{index + 1}", class: "img-fluid")

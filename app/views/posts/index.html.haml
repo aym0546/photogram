@@ -12,27 +12,106 @@
               = "#{time_ago_in_words(post.created_at)} ago"
         .post-content
           .content-images
+            - case post.images.size
+            - when 1
+              .row
+                .col
+                  = image_tag(post.images[0].variant(resize_to_fill: [600, 600]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
 
-            .row.g-1.mb-4
-              - post.images.each_with_index do |image, index|
-                .col{:class => "col-#{12 / [post.images.size, 4].min}"}
+            - when 2
+              .row.g-1
+                - post.images.each_with_index do |image, index|
+                  .col-6
+                    = image_tag(image.variant(resize_to_fill: [150, 300]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{index}" })
+                    = render "modal", image: image, index: index, post_id: post.id
 
-                  = image_tag(image.variant(resize_to_limit: [300, 300]),
-                              alt: "post image #{index + 1}",
-                              class: "img-fluid",
-                              data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{index}" })
+            - when 3
+              .row.g-1
+                .col-md-8
+                  = image_tag(post.images[0].variant(resize_to_fill: [400, 600]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-4
+                  .row.g-0
+                    - post.images[1..2].each_with_index do |image, i|
+                      .col-12.mb-1
+                        = image_tag(image.variant(resize_to_fill: [200, 300]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
 
-                  -# モーダル
-                  .modal.fade{id: "imageModal-#{post.id}-#{index}", tabindex: "-1", role: "dialog", aria: { labelledby: "modalLabel-#{post.id}-#{index}", hidden: true } }
-                    .modal-dialog.modal-dialog-centered.modal-xl
-                      .modal-content
-                        .modal-header
-                          -# %h5.modal-title{id: "modalLabel-#{post.id}-#{index}"} Image Preview
-                          %button.btn-close{ type: "button", data: { bs_dismiss: "modal" }, aria: { label: "Close" } }
-                        .modal-body.text-center
-                          = image_tag(image.variant(resize_to_limit: [900, 900]),
-                                      alt: "large image #{index + 1}",
-                                      class: "img-fluid")
+            - when 4
+              .row.g-1
+                .col-md-8
+                  = image_tag(post.images[0].variant(resize_to_fill: [400, 600]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-4
+                  .row
+                    - post.images[1..3].each_with_index do |image, i|
+                      .col-12.mb-1
+                        = image_tag(image.variant(resize_to_fill: [200, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
+
+            - when 5
+              .row.g-1
+                .col-md-6
+                  = image_tag(post.images[0].variant(resize_to_fill: [300, 600]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-6
+                  .row.g-1
+                    - post.images[1..2].each_with_index do |image, i|
+                      .col-6.mb-1
+                        = image_tag(image.variant(resize_to_fill: [150, 300]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
+                  .row.g-1
+                    - post.images[3..4].each_with_index do |image, i|
+                      .col-6.mb-1
+                        = image_tag(image.variant(resize_to_fill: [150, 300]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
+
+            - when 6
+              .row.g-1.mb-1
+                .col-md-6
+                  = image_tag(post.images[0].variant(resize_to_fill: [300, 400]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-6
+                  = image_tag(post.images[1].variant(resize_to_fill: [300, 400]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-1" })
+                  = render "modal", image: post.images[1], index: 1, post_id: post.id
+              .row.g-1
+                .col-md-12
+                  .row.g-1
+                    - post.images[2..5].each_with_index do |image, i|
+                      .col-3.mb-1
+                        = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
+
+            - when 7
+              .row.g-1.mb-1
+                .col-md-9
+                  = image_tag(post.images[0].variant(resize_to_fill: [450, 450]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-3
+                  - post.images[1..2].each_with_index do |image, i|
+                    .col-12.mb-1
+                      = image_tag(image.variant(resize_to_fill: [150, 225]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                      = render "modal", image: image, index: i + 1, post_id: post.id
+              .row.g-1
+                .col-md-12
+                  .row.g-1
+                    - post.images[3..6].each_with_index do |image, i|
+                      .col-3.mb-1
+                        = image_tag(image.variant(resize_to_fill: [150, 200]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
+
+            - when 8
+              .row.g-1
+                .col-md-6
+                  = image_tag(post.images[0].variant(resize_to_fill: [300, 600]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-0" })
+                  = render "modal", image: post.images[0], index: 0, post_id: post.id
+                .col-md-6
+                  .row.g-1
+                    - post.images[1..7].each_with_index do |image, i|
+                      .col-12
+                        = image_tag(image.variant(resize_to_fill: [300, 80]), class: "img-fluid", data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{i + 1}" })
+                        = render "modal", image: image, index: i + 1, post_id: post.id
 
         .post-footer
           .group
