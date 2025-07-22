@@ -12,7 +12,28 @@
               = "#{time_ago_in_words(post.created_at)} ago"
         .post-content
           .content-images
-            = image_tag post.images[0] if post.images[0].present?
+
+            .row.g-1.mb-4
+              - post.images.each_with_index do |image, index|
+                .col{:class => "col-#{12 / [post.images.size, 4].min}"}
+
+                  = image_tag(image.variant(resize_to_limit: [300, 300]),
+                              alt: "post image #{index + 1}",
+                              class: "img-fluid",
+                              data: { bs_toggle: "modal", bs_target: "#imageModal-#{post.id}-#{index}" })
+
+                  -# モーダル
+                  .modal.fade{id: "imageModal-#{post.id}-#{index}", tabindex: "-1", role: "dialog", aria: { labelledby: "modalLabel-#{post.id}-#{index}", hidden: true } }
+                    .modal-dialog.modal-dialog-centered.modal-xl
+                      .modal-content
+                        .modal-header
+                          -# %h5.modal-title{id: "modalLabel-#{post.id}-#{index}"} Image Preview
+                          %button.btn-close{ type: "button", data: { bs_dismiss: "modal" }, aria: { label: "Close" } }
+                        .modal-body.text-center
+                          = image_tag(image.variant(resize_to_limit: [900, 900]),
+                                      alt: "large image #{index + 1}",
+                                      class: "img-fluid")
+
         .post-footer
           .group
             .sign
