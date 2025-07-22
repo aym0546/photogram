@@ -1,0 +1,22 @@
+.container
+  .card
+    .heading
+      Status
+    - if @post.errors.any?
+      %ul
+        - @post.errors.full_messages.each do |message|
+          %li= message
+    .current-user
+      .avatar-img
+        = image_tag current_user.avatar
+      .user-info
+        = current_user.account
+
+    = form_with(model: @post, local: true) do |f|
+      .post-form
+        .caption
+          = f.text_field :caption, placeholder: "What's on your mind ?", class: 'text'
+        .images
+          = f.label :images, '+ Album'
+          = f.file_field :images, multiple: true, class: 'hidden'
+        = f.submit 'Post', class: 'nav-right btn-secondary'

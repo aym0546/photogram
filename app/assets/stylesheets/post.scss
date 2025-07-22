@@ -32,10 +32,14 @@ $image_size: variables.$avatar-s;
 
   &-content {
     .content-images {
-      width: 343px;
-      height: 225px;
+      width: 375px;
+      min-height: 225px;
       background-color: skyblue;
       margin-bottom: 15px;
+
+      img {
+        width: 375px;
+      }
     }
   }
 
@@ -54,5 +58,46 @@ $image_size: variables.$avatar-s;
       font-size: variables.$font-md;
       gap: 5px;
     }
+  }
+
+  &-form {
+    .caption {
+      padding-bottom: 5px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid variables.$gray-dark;
+    }
+
+    .images {
+      label {
+        font-size: variables.$font-md;
+        color: variables.$gray-deep;
+        border: 1px solid variables.$gray-brilliant;
+        padding: 5px 10px;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.current-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+
+  .avatar-img {
+    img {
+      width: variables.$avatar-m;
+      height: variables.$avatar-m;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .user-info {
+    font-size: variables.$font-lg;
   }
 }
