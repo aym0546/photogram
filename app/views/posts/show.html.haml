@@ -117,7 +117,8 @@
           - if user_signed_in?
             .sign
               - if current_user.has_liked?(@post)
-                = image_tag 'heart-full.svg'
+                = link_to post_like_path(@post), data: { method: 'delete' } do
+                  = image_tag 'heart-full.svg'
               - else
                 = link_to post_like_path(@post), data: { method: 'post'} do
                   = image_tag 'heart-blank.svg'
