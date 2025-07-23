@@ -15,6 +15,9 @@
 
 class Post < ApplicationRecord
   has_many_attached :images
+
+  has_many :likes, dependent: :destroy
+
   belongs_to :user
 
   validates :caption, length: { maximum: 400 }
@@ -25,6 +28,21 @@ class Post < ApplicationRecord
 
   def url
     Rails.application.routes.url_helpers.post_url(self, host: "http://localhost:3000")
+  end
+
+
+  def like_display
+    count = likes.count
+
+    return nil if count == 0
+
+    first_user = likes.first.user.account rescue 'Someone'
+
+    if count == 1
+      "#{first_user} liked your post"
+    else
+      "#{first_user} and #{count - 1} other#{'s' if count > 2} liked this post"
+    end
   end
 
   def images_content_type

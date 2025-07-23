@@ -9,6 +9,11 @@ import '@hotwired/turbo-rails';
 import $ from 'jquery';
 import axios from 'axios';
 
+const csrfToken = document
+  .querySelector('meta[name="csrf-token"]')
+  .getAttribute('content');
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken;
+
 import * as ActiveStorage from '@rails/activestorage';
 ActiveStorage.start();
 
@@ -18,6 +23,10 @@ import './controllers';
 import * as bootstrap from 'bootstrap';
 
 document.addEventListener('turbo:load', () => {
+  ////////////////////////////
+  // アバター画像のアップロード //
+  ////////////////////////////
+
   // 画像クリック → inputをトリガー
   $('#avatar-preview').on('click', () => {
     document.getElementById('avatar-input').click();
@@ -53,6 +62,38 @@ document.addEventListener('turbo:load', () => {
         flash('アップロードに失敗しました');
       });
   });
+
+  ////////////////////////////
+  // ♡ クリックで「いいね」する //
+  ////////////////////////////
+
+  $('.post').each(function () {
+    const $post = $(this);
+    const postId = $post.data('post-id');
+
+    // load 時にいいねステータスを取得
+    axios.get(`/posts/${postId}/like`).then((res) => {
+      const hasLiked = res.data.hasLiked;
+      handleHeartDisplay(hasLiked, $post);
+    });
+
+    // ♡ がクリックされたとき
+    $post.find('.inactive-heart').on('click', () => {
+      axios.post(`/posts/${postId}/like`).then((res) => {
+        if (res.data.status === 'ok') {
+          handleHeartDisplay(true, $post);
+        }
+      });
+    });
+
+    $post.find('.active-heart').on('click', () => {
+      axios.delete(`/posts/${postId}/like`).then((res) => {
+        if (res.data.status === 'ok') {
+          handleHeartDisplay(false, $post);
+        }
+      });
+    });
+  });
 });
 
 // flash 表示
@@ -76,3 +117,14 @@ function flash(message, type = 'notice') {
     flash.fadeOut(400);
   }, 3000);
 }
+
+// ♡ の差し替え
+const handleHeartDisplay = (hasLiked, container) => {
+  if (hasLiked) {
+    container.find('.active-heart').removeClass('offscreen');
+    container.find('.inactive-heart').addClass('offscreen');
+  } else {
+    container.find('.inactive-heart').removeClass('offscreen');
+    container.find('.active-heart').addClass('offscreen');
+  }
+};

@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
-  has_many :posts
+
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :account, presence: true,
                       length: { maximum: 25 },
@@ -32,6 +34,10 @@ class User < ApplicationRecord
     if avatar.attached? && avatar.blob&.byte_size > 5.megabytes
       errors.add(:avatar, '：5MB 以下のファイルのみアップロード可能です')
     end
+  end
+
+  def has_liked?(post)
+    likes.exists?(post_id: post.id)
   end
 
 end

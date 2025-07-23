@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   # プロフィール表示・更新用のカスタムコントローラ
   resource :user, only: [:show, :update]
-  resources :posts, only: [:show, :new, :create]
+
+  resources :posts, only: [:show, :new, :create] do
+    resource :like, only: [:show, :create, :destroy]
+  end
 
 end

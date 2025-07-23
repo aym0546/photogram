@@ -2,7 +2,7 @@
 @use 'reset';
 @use 'variables';
 @use 'flash';
-@use "bootstrap/scss/bootstrap";
+@use 'bootstrap/scss/bootstrap';
 @use 'form';
 @use 'common';
 @use 'post';
@@ -32,4 +32,8 @@ body {
 a {
   text-decoration: none;
   color: variables.$text-base-color;
+}
+
+.offscreen {
+  display: none;
 }
