@@ -58,14 +58,20 @@ document.addEventListener('turbo:load', () => {
       });
   });
 
-  ///////////////////////
-  // 「いいね」の情報取得 //
-  ///////////////////////
+  ///////////////////////////////////////
+  // 「いいね」の情報を取得して❤️を出し分ける //
+  ///////////////////////////////////////
 
   const dataset = $(`#post-show`).data();
   const postId = dataset.postId;
   axios.get(`/posts/${postId}/like`).then((response) => {
-    console.log(response);
+    const hasLiked = response.data.hasLiked;
+
+    if (hasLiked) {
+      $('.active-heart').removeClass('offscreen');
+    } else {
+      $('.inactive-heart').removeClass('offscreen');
+    }
   });
 });
 

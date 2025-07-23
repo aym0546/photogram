@@ -116,10 +116,10 @@
         .group
           - if user_signed_in?
             .sign
-              - if current_user.has_liked?(@post)
+              .offscreen.active-heart
                 = link_to post_like_path(@post), data: { method: 'delete' } do
                   = image_tag 'heart-full.svg'
-              - else
+              .offscreen.inactive-heart
                 = link_to post_like_path(@post), data: { method: 'post'} do
                   = image_tag 'heart-blank.svg'
           .sign
