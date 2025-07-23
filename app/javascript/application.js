@@ -9,6 +9,9 @@ import '@hotwired/turbo-rails';
 import $ from 'jquery';
 import axios from 'axios';
 
+import * as ActiveStorage from '@rails/activestorage';
+ActiveStorage.start();
+
 // Stimulus Controllers
 import './controllers';
 

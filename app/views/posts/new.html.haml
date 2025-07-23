@@ -12,11 +12,13 @@
       .user-info
         = current_user.account
 
-    = form_with(model: @post, local: true) do |f|
+    = form_with(model: @post, local: true, html: { multipart: true }) do |f|
       .post-form
         .caption
           = f.text_field :caption, placeholder: "What's on your mind ?", class: 'text'
-        .images
-          = f.label :images, '+ Album'
-          = f.file_field :images, multiple: true, class: 'hidden'
+        .images{ data: { controller: "image-preview" } }
+          = f.label :images, '+ Album', for: 'image_upload'
+          = f.file_field :images, multiple: true, accept: 'image/*', id: 'image_upload', class: 'hidden', data: { action: "change->image-preview#preview", image_preview_target: "input" }
+          #preview{ data: { image_preview_target: "output" } }
+
         = f.submit 'Post', class: 'nav-right btn-secondary'
