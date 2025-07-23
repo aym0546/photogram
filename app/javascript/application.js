@@ -67,43 +67,32 @@ document.addEventListener('turbo:load', () => {
   // ♡ クリックで「いいね」する //
   ////////////////////////////
 
-  const dataset = $(`#post-show`).data();
-  const postId = dataset.postId;
-  axios.get(`/posts/${postId}/like`).then((response) => {
-    const hasLiked = response.data.hasLiked;
+  $('.post').each(function () {
+    const $post = $(this);
+    const postId = $post.data('post-id');
 
-    handleHeartDisplay(hasLiked);
-  });
+    // load 時にいいねステータスを取得
+    axios.get(`/posts/${postId}/like`).then((res) => {
+      const hasLiked = res.data.hasLiked;
+      handleHeartDisplay(hasLiked, $post);
+    });
 
-  $('.inactive-heart').on('click', () => {
-    axios
-      .post(`/posts/${postId}/like`)
-      .then((response) => {
-        // 同時にハートの表示の変更も組み込み
-        if (response.data.status === 'ok') {
-          $('.active-heart').removeClass('offscreen');
-          $('.inactive-heart').addClass('offscreen');
+    // ♡ がクリックされたとき
+    $post.find('.inactive-heart').on('click', () => {
+      axios.post(`/posts/${postId}/like`).then((res) => {
+        if (res.data.status === 'ok') {
+          handleHeartDisplay(true, $post);
         }
-      })
-      .catch((e) => {
-        window.alert('Error');
-        console.log(e);
       });
-  });
+    });
 
-  $('.active-heart').on('click', () => {
-    axios
-      .delete(`/posts/${postId}/like`)
-      .then((response) => {
-        if (response.data.status === 'ok') {
-          $('.inactive-heart').removeClass('offscreen');
-          $('.active-heart').addClass('offscreen');
+    $post.find('.active-heart').on('click', () => {
+      axios.delete(`/posts/${postId}/like`).then((res) => {
+        if (res.data.status === 'ok') {
+          handleHeartDisplay(false, $post);
         }
-      })
-      .catch((e) => {
-        window.alert('Error');
-        console.log(e);
       });
+    });
   });
 });
 
@@ -130,10 +119,12 @@ function flash(message, type = 'notice') {
 }
 
 // ♡ の差し替え
-const handleHeartDisplay = (hasLiked) => {
+const handleHeartDisplay = (hasLiked, container) => {
   if (hasLiked) {
-    $('.active-heart').removeClass('offscreen');
+    container.find('.active-heart').removeClass('offscreen');
+    container.find('.inactive-heart').addClass('offscreen');
   } else {
-    $('.inactive-heart').removeClass('offscreen');
+    container.find('.inactive-heart').removeClass('offscreen');
+    container.find('.active-heart').addClass('offscreen');
   }
 };
