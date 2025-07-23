@@ -1,6 +1,6 @@
 .container
   .card
-    .post
+    .post#post-show{data: {post_id: @post.id}}
       .post-header
         .avatar-img
           = image_tag @post.user.avatar

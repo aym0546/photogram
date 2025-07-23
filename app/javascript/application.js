@@ -18,6 +18,10 @@ import './controllers';
 import * as bootstrap from 'bootstrap';
 
 document.addEventListener('turbo:load', () => {
+  ////////////////////////////
+  // アバター画像のアップロード //
+  ////////////////////////////
+
   // 画像クリック → inputをトリガー
   $('#avatar-preview').on('click', () => {
     document.getElementById('avatar-input').click();
@@ -52,6 +56,16 @@ document.addEventListener('turbo:load', () => {
         console.error('Upload error', e);
         flash('アップロードに失敗しました');
       });
+  });
+
+  ///////////////////////
+  // 「いいね」の情報取得 //
+  ///////////////////////
+
+  const dataset = $(`#post-show`).data();
+  const postId = dataset.postId;
+  axios.get(`/posts/${postId}/like`).then((response) => {
+    console.log(response);
   });
 });
 
