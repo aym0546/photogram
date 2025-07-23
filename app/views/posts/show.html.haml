@@ -117,11 +117,9 @@
           - if user_signed_in?
             .sign
               .offscreen.active-heart
-                = link_to post_like_path(@post), data: { method: 'delete' } do
-                  = image_tag 'heart-full.svg'
+                = image_tag 'heart-full.svg'
               .offscreen.inactive-heart
-                = link_to post_like_path(@post), data: { method: 'post'} do
-                  = image_tag 'heart-blank.svg'
+                = image_tag 'heart-blank.svg'
           .sign
             = image_tag 'comment.svg'
           .sign

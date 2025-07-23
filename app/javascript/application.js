@@ -9,6 +9,11 @@ import '@hotwired/turbo-rails';
 import $ from 'jquery';
 import axios from 'axios';
 
+const csrfToken = document
+  .querySelector('meta[name="csrf-token"]')
+  .getAttribute('content');
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken;
+
 import * as ActiveStorage from '@rails/activestorage';
 ActiveStorage.start();
 
@@ -58,20 +63,47 @@ document.addEventListener('turbo:load', () => {
       });
   });
 
-  ///////////////////////////////////////
-  // 「いいね」の情報を取得して❤️を出し分ける //
-  ///////////////////////////////////////
+  ////////////////////////////
+  // ♡ クリックで「いいね」する //
+  ////////////////////////////
 
   const dataset = $(`#post-show`).data();
   const postId = dataset.postId;
   axios.get(`/posts/${postId}/like`).then((response) => {
     const hasLiked = response.data.hasLiked;
 
-    if (hasLiked) {
-      $('.active-heart').removeClass('offscreen');
-    } else {
-      $('.inactive-heart').removeClass('offscreen');
-    }
+    handleHeartDisplay(hasLiked);
+  });
+
+  $('.inactive-heart').on('click', () => {
+    axios
+      .post(`/posts/${postId}/like`)
+      .then((response) => {
+        // 同時にハートの表示の変更も組み込み
+        if (response.data.status === 'ok') {
+          $('.active-heart').removeClass('offscreen');
+          $('.inactive-heart').addClass('offscreen');
+        }
+      })
+      .catch((e) => {
+        window.alert('Error');
+        console.log(e);
+      });
+  });
+
+  $('.active-heart').on('click', () => {
+    axios
+      .delete(`/posts/${postId}/like`)
+      .then((response) => {
+        if (response.data.status === 'ok') {
+          $('.inactive-heart').removeClass('offscreen');
+          $('.active-heart').addClass('offscreen');
+        }
+      })
+      .catch((e) => {
+        window.alert('Error');
+        console.log(e);
+      });
   });
 });
 
@@ -96,3 +128,12 @@ function flash(message, type = 'notice') {
     flash.fadeOut(400);
   }, 3000);
 }
+
+// ♡ の差し替え
+const handleHeartDisplay = (hasLiked) => {
+  if (hasLiked) {
+    $('.active-heart').removeClass('offscreen');
+  } else {
+    $('.inactive-heart').removeClass('offscreen');
+  }
+};
