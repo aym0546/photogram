@@ -114,8 +114,10 @@
 
       .post-footer
         .group
-          .sign
-            = image_tag 'heart-blank.svg'
+          - if user_signed_in?
+            .sign
+              = link_to post_like_path(@post), data: { method: 'post'} do
+                = image_tag 'heart-blank.svg'
           .sign
             = image_tag 'comment.svg'
           .sign
