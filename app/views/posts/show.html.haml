@@ -128,7 +128,7 @@
             = link_to "https://twitter.com/share?url=#{CGI.escape(@post.url)}&text=#{CGI.escape("【テスト】\n\n#{@post.caption}")}", target: "_blank", rel: "noopener" do
               = image_tag 'link.svg'
         .post-like
-          Jasmine and 12,000 other liked your post
+          = @post.like_display
         .caption
           .caption-user
             = @post.user.account
