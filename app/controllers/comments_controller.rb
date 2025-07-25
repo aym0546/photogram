@@ -17,4 +17,23 @@ class CommentsController < ApplicationController
       }
     end
   end
+
+  def create
+    post = Post.find(params[:post_id])
+    @comment = post.comments.build(comment_params)
+    @comment.user = current_user
+
+    if @comment.save
+      render json: @comment.as_json(include: { user: { only: [:account], methods: [:avatar_url] } })
+    else
+      render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
+
 end
