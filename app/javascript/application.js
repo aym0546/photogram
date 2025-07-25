@@ -108,6 +108,20 @@ document.addEventListener('turbo:load', () => {
       );
     });
   });
+
+  //////////////////////////////////////////
+  // コメントを入力したら投稿ボタン ↑ を表示する //
+  //////////////////////////////////////////
+  $('.comment-body').on('input', function () {
+    const value = $(this).val().trim();
+    const $btn = $('.comment-btn');
+
+    if (value.length > 0) {
+      $btn.removeClass('offscreen');
+    } else {
+      $btn.addClass('offscreen');
+    }
+  });
 });
 
 // flash 表示
