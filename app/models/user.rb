@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
   validates :account, presence: true,
@@ -38,6 +39,10 @@ class User < ApplicationRecord
 
   def has_liked?(post)
     likes.exists?(post_id: post.id)
+  end
+
+  def avatar_url
+    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, host: 'http://localhost:3000') : nil
   end
 
 end

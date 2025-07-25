@@ -1,0 +1,12 @@
+.container
+  .card
+    .heading
+      Comment
+    .comments-container#post-show{data: {post_id: @post.id}}
+    .comment-footer
+      .comment-img
+        = image_tag 'comment.svg'
+      .comment-form
+        = text_area_tag :comment_body, '', placeholder: 'Leave a comment...', class: 'text comment-body'
+      .comment-submit
+        = image_tag 'arrow-up-circle.svg', class: 'comment-btn offscreen'

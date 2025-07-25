@@ -119,7 +119,8 @@
           .offscreen.inactive-heart
             = image_tag 'heart-blank.svg'
       .sign
-        = image_tag 'comment.svg'
+        = link_to post_comments_path(post) do
+          = image_tag 'comment.svg'
       .sign
         = link_to "https://twitter.com/share?url=#{CGI.escape(post.url)}&text=#{CGI.escape("【テスト】\n\n#{post.caption}")}", target: "_blank", rel: "noopener" do
           = image_tag 'link.svg'

@@ -1,0 +1,62 @@
+@use 'variables';
+
+$image_size: variables.$avatar-sm;
+
+.comments-container {
+  .post-comment {
+    display: flex;
+    margin: 40px 0;
+
+    .comment-img {
+      margin: 5px 20px;
+
+      img {
+        width: $image_size;
+        height: $image_size;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .comment-text {
+      &-user {
+        color: variables.$gray-deep;
+        font-size: variables.$font-lg;
+        margin-bottom: 5px;
+      }
+
+      &-body {
+        color: variables.$gray-dark;
+      }
+    }
+  }
+}
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  background-color: variables.$base-bg-color;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.125);
+  position: fixed;
+  bottom: 30px;
+
+  img {
+    width: 100%;
+  }
+
+  .comment-img {
+    margin: 20px;
+    width: 20px;
+  }
+
+  .comment-form {
+    flex-grow: 1;
+    margin-top: 10px;
+  }
+
+  .comment-submit {
+    margin: 5px 10px;
+    width: 20px;
+  }
+}
