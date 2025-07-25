@@ -41,4 +41,8 @@ class User < ApplicationRecord
     likes.exists?(post_id: post.id)
   end
 
+  def avatar_url
+    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, host: 'http://localhost:3000') : nil
+  end
+
 end
