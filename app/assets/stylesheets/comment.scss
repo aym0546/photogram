@@ -31,3 +31,28 @@ $image_size: variables.$avatar-sm;
     }
   }
 }
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+  width: 400px;
+
+  img {
+    width: 100%;
+  }
+
+  .comment-img {
+    margin: 20px;
+    width: 20px;
+  }
+
+  .comment-form {
+    flex-grow: 1;
+    margin-top: 10px;
+  }
+
+  .comment-submit {
+    margin: 5px 10px;
+    width: 20px;
+  }
+}

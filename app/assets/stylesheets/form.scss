@@ -18,19 +18,22 @@ input,
 select {
   &.text {
     @include form-control;
-  }
 
-  ::placeholder {
-    color: variables.$gray-dark;
+    &::placeholder {
+      color: variables.$gray-dark;
+    }
   }
 }
 
 textarea {
-  @include form-control(203px);
-  resize: vertical;
+  &.text {
+    @include form-control(35px);
+    resize: vertical;
+    font-size: variables.$font-base;
 
-  ::placeholder {
-    color: variables.$gray-dark;
+    &::placeholder {
+      color: variables.$gray-brilliant;
+    }
   }
 }
 
