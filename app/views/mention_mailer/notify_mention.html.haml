@@ -1,0 +1,9 @@
+%p{ style: "font-weight: bold; color: #222; font-size: 16px;" }
+  #{@mentioned_user.account} さん
+
+%p{ style: "margin-top: 10px; color: #333;" }
+  #{@comment_author.account} さんが あなたをメンションしました。
+
+= link_to post_comments_url(@post), style: "text-decoration: none;" do
+  %p{ style: "background-color: #f2f2f2; padding: 20px; border-radius: 10px; color: #333;" }
+    = @comment.body
