@@ -29,7 +29,7 @@ class Comment < ApplicationRecord
     mentions.each do |mention|
       mentioned_user = User.find_by(account: mention)
       if mentioned_user
-        MentionMailer.notify_mention(mentioned_user, self, user).deliver_now
+        MentionMailer.notify_mention(mentioned_user, self, user).deliver_later
       end
     end
   end
