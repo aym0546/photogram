@@ -1,0 +1,30 @@
+%h1 自分の！
+-# = render 'commons/profile', user: @user
+.container
+  .card
+    .heading
+      = user.account
+    .user_info
+      .avatar
+        = image_tag user.avatar_img, id: 'avatar-preview'
+        = form_with url: '#', html: { id: "avatar-form", enctype: "multipart/form-data" }, local: true do
+          = file_field_tag :avatar, id: "avatar-input", accept: "image/png,image/jpeg"
+      .achievement
+        .block
+          .count
+            = user.posts.count
+          .section
+            Posts
+        .block
+          .count
+            110
+          .section
+            Followers
+        .block
+          .count
+            44
+          .section
+            Following
+    .user_posts
+      - user.posts.order(created_at: :desc).each do |post|
+        = render 'commons/image_grid', post: post
