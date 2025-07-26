@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   # プロフィール表示・更新用のカスタムコントローラ
-  resource :user, only: [:show, :update]
+  get '/user', to: 'users#me', as: :my_profile
+
+  resources :users, only: [:show]
 
   resources :posts, only: [:show, :new, :create] do
     resources :comments, only: [:index, :create]
