@@ -25,6 +25,7 @@ gem 'hamlit-rails'
 gem 'annotate'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'sidekiq'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -66,6 +67,9 @@ group :development do
   gem 'web-console'
 
   gem 'html2haml'
+
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :test do
