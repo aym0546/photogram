@@ -1,10 +1,12 @@
 .post#post-show{data: {post_id: post.id}}
   .post-header
     .avatar-img
-      = image_tag post.user.avatar
+      = link_to user_path(post.user) do
+        = image_tag post.user.avatar
     .post-info
       .post-user
-        = post.user.account
+        = link_to user_path(post.user) do
+          = post.user.account
       .post-ago
         = "#{time_ago_in_words(post.created_at)} ago"
   .post-content
@@ -27,6 +29,7 @@
       = post.like_display
     .caption
       .caption-user
-        = post.user.account
+        = link_to user_path(post.user) do
+          = post.user.account
       .caption-content
         = post.caption

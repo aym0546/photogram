@@ -104,7 +104,19 @@ document.addEventListener('turbo:load', () => {
     const comments = res.data;
     comments.forEach((comment) => {
       $('.comments-container').append(
-        `<div class="post-comment"><div class="comment-img"><img src="${comment.user.avatar_url}" alt="avatar"></div><div class="comment-text"><div class="comment-text-user">${comment.user.account}</div><div class="comment-text-body">${comment.body}</div></div></div>`
+        `<div class="post-comment">
+          <div class="comment-img">
+            <a href="/users/${comment.user.id}">
+              <img src="${comment.user.avatar_url}" alt="avatar">
+            </a>
+          </div>
+          <div class="comment-text">
+            <div class="comment-text-user">
+              <a href="/users/${comment.user.id}">${comment.user.account}</a>
+            </div>
+            <div class="comment-text-body">${comment.body}</div>
+          </div>
+        </div>`
       );
     });
   });

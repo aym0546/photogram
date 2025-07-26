@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       format.json {
         render json: @comments.to_json(include: {
           user: {
-            only: [:account],
+            only: [:id, :account],
             methods: [:avatar_url]
           }
         })
