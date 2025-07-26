@@ -32,12 +32,12 @@ $image_size: variables.$avatar-s;
 
   &-content {
     .content-images {
-      width: 375px;
+      width: 400px;
       min-height: 225px;
       margin-bottom: 15px;
 
       img {
-        width: 375px;
+        width: 400px;
       }
     }
   }
@@ -99,4 +99,10 @@ $image_size: variables.$avatar-s;
   .user-info {
     font-size: variables.$font-lg;
   }
+}
+
+.default_post_img {
+  width: 400px;
+  height: 400px;
+  background-color: variables.$gray-brilliant;
 }
