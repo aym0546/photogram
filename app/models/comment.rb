@@ -20,4 +20,17 @@ class Comment < ApplicationRecord
   belongs_to :post
 
   validates :body, presence: true, length: { maximum: 400 }
+
+  after_create :check_mention
+
+  private
+  def check_mention
+    mentions = body.scan(/@(\w+)/).flatten
+    mentions.each do |mention|
+      mentioned_user = User.find_by(account: mention)
+      if mentioned_user
+        MentionMailer.notify_mention(mentioned_user, self, user).deliver_now
+      end
+    end
+  end
 end
