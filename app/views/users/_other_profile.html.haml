@@ -1,6 +1,21 @@
-%h1 他人の！
--# = render 'commons/profile', user: @user
-.container
+- relationship_id = current_user.relationship_with(user)
+- is_following = current_user.following?(user)
+
+.container{ data: {
+      controller: 'follow',
+      follow_user_id_value: user.id,
+      follow_followed_value: is_following
+    } }
+
+  .nav-right
+    %span{ data: {
+      action: 'click->follow#toggleFollow',
+      follow_target: 'span',
+      url: is_following && relationship_id.present? ? relationship_path(relationship_id) : relationships_path,
+      method: is_following && relationship_id.present? ? 'DELETE' : 'POST'
+    } }
+      = is_following ? 'UnFollow' : 'Follow'
+
   .card
     .heading
       = user.account
@@ -14,13 +29,13 @@
           .section
             Posts
         .block
-          .count
-            110
+          .count{ data: { follow_target: 'followerCount' } }
+            = user.followers.count
           .section
             Followers
         .block
           .count
-            44
+            = user.followings.count
           .section
             Following
     .user_posts
