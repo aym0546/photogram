@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
+  resources :relationships, only: [:create, :destroy]
+  get 'users/:id/relationship', to: 'relationships#show', as: :user_relationship
+
   resources :posts, only: [:show, :new, :create] do
     resources :comments, only: [:index, :create]
     resource :like, only: [:show, :create, :destroy]
