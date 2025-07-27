@@ -12,6 +12,11 @@
   white-space: nowrap;
   font-size: variables.$font-lg;
 
+  &:hover {
+    color: variables.$gray-middle;
+    cursor: pointer;
+  }
+
   a {
     color: variables.$gray-bright;
 

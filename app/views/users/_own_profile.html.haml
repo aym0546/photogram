@@ -1,5 +1,6 @@
-%h1 自分の！
--# = render 'commons/profile', user: @user
+.nav-right
+  = link_to 'Log out', destroy_user_session_path, method: :delete
+
 .container
   .card
     .heading
@@ -17,12 +18,12 @@
             Posts
         .block
           .count
-            110
+            = user.followers.count
           .section
             Followers
         .block
           .count
-            44
+            = user.followings.count
           .section
             Following
     .user_posts
