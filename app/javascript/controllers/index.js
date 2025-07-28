@@ -18,3 +18,6 @@ application.register("hello", HelloController)
 
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
+
+import LikeController from "./like_controller"
+application.register("like", LikeController)
