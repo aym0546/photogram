@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # プロフィール表示・更新用のカスタムコントローラ
   get '/user', to: 'users#me', as: :my_profile
+  patch '/user', to: 'users#update', as: :update_my_profile
 
   resources :users, only: [:show]
 

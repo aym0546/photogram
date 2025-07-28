@@ -1,24 +1,58 @@
 import { Controller } from '@hotwired/stimulus';
 import axios from 'axios';
 
+import { flash } from '../utils/flash';
+
 // Connects to data-controller="comments"
 export default class extends Controller {
-  static targets = ['container'];
+  static targets = ['container', 'body', 'btn'];
   static values = { postId: Number };
 
   connect() {
+    this.loadComments();
+  }
+
+  loadComments() {
     axios
       .get(`/posts/${this.postIdValue}/comments.json`)
       .then((res) => {
-        const comments = res.data;
-        comments.forEach((comment) => {
-          const commentHTML = this.buildCommentHTML(comment);
-          this.containerTarget.insertAdjacentHTML('beforeend', commentHTML);
-        });
+        res.data.forEach((comment) => this.appendComment(comment));
       })
       .catch((e) => {
         console.error('⚠️Failure to retrieve comments');
       });
+  }
+
+  // コメントを入力したら投稿ボタン ↑ を表示
+  inputChanged() {
+    const value = this.bodyTarget.value.trim();
+    this.btnTarget.classList.toggle('offscreen', value.length === 0);
+  }
+
+  // コメント投稿機能
+  submitComment() {
+    const body = this.bodyTarget.value.trim();
+    if (!body) return flash('コメントを入力してください');
+
+    axios
+      .post(`/posts/${this.postIdValue}/comments`, {
+        comment: { body: body },
+      })
+      .then((res) => {
+        this.appendComment(res.data);
+        this.bodyTarget.value = '';
+        this.inputChanged(); // btn 再非表示
+      })
+      .catch((error) => {
+        const msg =
+          error.response?.data?.errors?.join(', ') || '投稿に失敗しました';
+        flash(`error: ${msg}`);
+      });
+  }
+
+  appendComment(comment) {
+    const commentHTML = this.buildCommentHTML(comment);
+    this.containerTarget.insertAdjacentHTML('beforeend', commentHTML);
   }
 
   buildCommentHTML(comment) {

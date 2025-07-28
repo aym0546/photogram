@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AvatarUpdateController from "./avatar_update_controller"
+application.register("avatar-update", AvatarUpdateController)
+
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
@@ -15,3 +18,6 @@ application.register("hello", HelloController)
 
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
+
+import LikeController from "./like_controller"
+application.register("like", LikeController)

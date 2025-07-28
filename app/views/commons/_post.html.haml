@@ -1,4 +1,4 @@
-.post#post-show{data: {post_id: post.id}}
+.post#post-show{ data: { controller: 'like', like_post_id_value: post.id } }
   .post-header
     .avatar-img
       = link_to user_path(post.user) do
@@ -15,10 +15,12 @@
     .group
       - if user_signed_in?
         .sign
-          .offscreen.active-heart
-            = image_tag 'heart-full.svg'
-          .offscreen.inactive-heart
-            = image_tag 'heart-blank.svg'
+          = image_tag 'heart-full.svg',
+            class: 'active-heart offscreen',
+            data: { like_target: 'activeHeart', action: 'click->like#unlike' }
+          = image_tag 'heart-blank.svg',
+            class: 'inactive-heart',
+            data: { like_target: 'inactiveHeart', action: 'click->like#like' }
       .sign
         = link_to post_comments_path(post) do
           = image_tag 'comment.svg'
