@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AvatarUpdateController from "./avatar_update_controller"
+application.register("avatar-update", AvatarUpdateController)
+
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
