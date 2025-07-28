@@ -27,7 +27,9 @@
 
     .nav-right
       - if user_signed_in?
-        -if !current_page?(new_post_path)
+        - if request.path.match?(/^\/users\/\d+$/)
+          .offscreen
+        - elsif !current_page?(new_post_path)
           = link_to 'Log out', destroy_user_session_path, method: :delete
       - elsif !current_page?(new_user_session_path)
         = link_to 'Log in', new_user_session_path

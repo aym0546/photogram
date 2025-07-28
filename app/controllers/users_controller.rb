@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:me, :update]
 
   def show
+    @user = User.find(params[:id])
+  end
+
+  def me
+    render :show
   end
 
   def update

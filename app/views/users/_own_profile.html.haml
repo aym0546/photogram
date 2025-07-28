@@ -1,0 +1,31 @@
+.nav-right
+  = link_to 'Log out', destroy_user_session_path, method: :delete
+
+.container
+  .card
+    .heading
+      = user.account
+    .user_info
+      .avatar
+        = image_tag user.avatar_img, id: 'avatar-preview'
+        = form_with url: '#', html: { id: "avatar-form", enctype: "multipart/form-data" }, local: true do
+          = file_field_tag :avatar, id: "avatar-input", accept: "image/png,image/jpeg"
+      .achievement
+        .block
+          .count
+            = user.posts.count
+          .section
+            Posts
+        .block
+          .count
+            = user.followers.count
+          .section
+            Followers
+        .block
+          .count
+            = user.followings.count
+          .section
+            Following
+    .user_posts
+      - user.posts.order(created_at: :desc).each do |post|
+        = render 'commons/image_grid', post: post

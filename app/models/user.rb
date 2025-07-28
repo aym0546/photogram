@@ -10,12 +10,39 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :following
+  has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+
   validates :account, presence: true,
                       length: { maximum: 25 },
                       uniqueness: true
 
   validate :avatar_content_type
   validate :avatar_size
+
+  def follow!(user)
+    if user.is_a?(User)
+      user_id = user.id
+    else
+      user_id = user
+    end
+
+    following_relationships.create!(following_id: user_id)
+  end
+
+  def unfollow!(user)
+    following_relationships.find_by!(following_id: user.id).destroy!
+  end
+
+  def following?(user)
+    followings.include?(user)
+  end
+
+  def relationship_with(other_user)
+    following_relationships.find_by(follower_id: self.id, following_id: other_user.id)&.id
+  end
 
   def avatar_img
     if self.avatar&.attached?
