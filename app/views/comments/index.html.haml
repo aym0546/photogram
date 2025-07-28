@@ -2,7 +2,8 @@
   .card
     .heading
       Comment
-    .comments-container#post-show{data: {post_id: @post.id}}
+    #post-show{ data: { controller: 'comments', comments_post_id_value: @post.id, post_id: @post.id } }
+      .comments-container{ data: { comments_target: 'container' } }
     .comment-footer
       .comment-img
         = image_tag 'comment.svg'

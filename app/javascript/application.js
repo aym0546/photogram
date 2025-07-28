@@ -95,32 +95,6 @@ document.addEventListener('turbo:load', () => {
     });
   });
 
-  ////////////////
-  // コメント表示 //
-  ////////////////
-  const dataset = $(`#post-show`).data();
-  const postId = dataset.postId;
-  axios.get(`/posts/${postId}/comments.json`).then((res) => {
-    const comments = res.data;
-    comments.forEach((comment) => {
-      $('.comments-container').append(
-        `<div class="post-comment">
-          <div class="comment-img">
-            <a href="/users/${comment.user.id}">
-              <img src="${comment.user.avatar_url}" alt="avatar">
-            </a>
-          </div>
-          <div class="comment-text">
-            <div class="comment-text-user">
-              <a href="/users/${comment.user.id}">${comment.user.account}</a>
-            </div>
-            <div class="comment-text-body">${comment.body}</div>
-          </div>
-        </div>`
-      );
-    });
-  });
-
   //////////////////////////////////////////
   // コメントを入力したら投稿ボタン ↑ を表示する //
   //////////////////////////////////////////
@@ -138,6 +112,9 @@ document.addEventListener('turbo:load', () => {
   ///////////////////
   // コメント投稿機能 //
   ///////////////////
+  const dataset = $(`#post-show`).data();
+  const postId = dataset.postId;
+
   $('.comment-btn').on('click', () => {
     const body = $('#comment_body').val();
 
