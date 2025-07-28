@@ -2,12 +2,12 @@
   .card
     .heading
       Comment
-    #post-show{ data: { controller: 'comments', comments_post_id_value: @post.id, post_id: @post.id } }
+    %div{ data: { controller: 'comments', comments_post_id_value: @post.id } }
       .comments-container{ data: { comments_target: 'container' } }
-    .comment-footer
-      .comment-img
-        = image_tag 'comment.svg'
-      .comment-form
-        = text_area_tag :comment_body, '', placeholder: 'Leave a comment...', class: 'text comment-body'
-      .comment-submit
-        = image_tag 'arrow-up-circle.svg', class: 'comment-btn offscreen'
+      .comment-footer
+        .comment-img
+          = image_tag 'comment.svg'
+        .comment-form
+          = text_area_tag :comment_body, '', { placeholder: 'Leave a comment...', class: 'text comment-body', data: { comments_target: 'body', action: 'input->comments#inputChanged' } }
+        .comment-submit
+          = image_tag 'arrow-up-circle.svg', { class: 'comment-btn offscreen', data: { comments_target: 'btn', action: 'click->comments#submitComment' } }

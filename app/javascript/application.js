@@ -94,58 +94,6 @@ document.addEventListener('turbo:load', () => {
       });
     });
   });
-
-  //////////////////////////////////////////
-  // コメントを入力したら投稿ボタン ↑ を表示する //
-  //////////////////////////////////////////
-  $('.comment-body').on('input', function () {
-    const value = $(this).val().trim();
-    const $btn = $('.comment-btn');
-
-    if (value.length > 0) {
-      $btn.removeClass('offscreen');
-    } else {
-      $btn.addClass('offscreen');
-    }
-  });
-
-  ///////////////////
-  // コメント投稿機能 //
-  ///////////////////
-  const dataset = $(`#post-show`).data();
-  const postId = dataset.postId;
-
-  $('.comment-btn').on('click', () => {
-    const body = $('#comment_body').val();
-
-    if (!body) {
-      flash('コメントを入力してください');
-    } else {
-      axios
-        .post(`/posts/${postId}/comments`, {
-          comment: { body: body },
-        })
-        .then((res) => {
-          const comment = res.data;
-          $('.comments-container').append(
-            `<div class="post-comment"><div class="comment-img"><img src="${comment.user.avatar_url}" alt="avatar"></div><div class="comment-text"><div class="comment-text-user">${comment.user.account}</div><div class="comment-text-body">${comment.body}</div></div></div>`
-          );
-          $('#comment_body').val('');
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 422) {
-            const errors = error.response.data.errors;
-            if (errors && Array.isArray(errors)) {
-              flash(`エラー： ${errors.join(', ')}`);
-            } else {
-              flash('コメントの投稿に失敗しました');
-            }
-          } else {
-            flash('予期しないエラーが発生しました');
-          }
-        });
-    }
-  });
 });
 
 // flash 表示
