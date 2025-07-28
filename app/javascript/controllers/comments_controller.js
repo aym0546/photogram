@@ -1,6 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 import axios from 'axios';
 
+import { flash } from '../utils/flash';
+
 // Connects to data-controller="comments"
 export default class extends Controller {
   static targets = ['container', 'body', 'btn'];

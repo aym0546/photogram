@@ -22,6 +22,8 @@ import './controllers';
 
 import * as bootstrap from 'bootstrap';
 
+import { flash } from './utils/flash';
+
 document.addEventListener('turbo:load', () => {
   ////////////////////////////
   // アバター画像のアップロード //
@@ -95,28 +97,6 @@ document.addEventListener('turbo:load', () => {
     });
   });
 });
-
-// flash 表示
-function flash(message, type = 'notice') {
-  const flash = $('.flash');
-
-  // 要素が存在しない場合は何もしない
-  if (flash.length === 0) {
-    console.warn('.flash element is not found');
-    return;
-  }
-
-  // クラスを設定
-  flash.removeClass().addClass(`flash flash-${type}`);
-
-  // メッセージ設定と表示
-  flash.text(message).show();
-
-  // 一定時間後に非表示（3秒）
-  setTimeout(() => {
-    flash.fadeOut(400);
-  }, 3000);
-}
 
 // ♡ の差し替え
 const handleHeartDisplay = (hasLiked, container) => {
