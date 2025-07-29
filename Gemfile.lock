@@ -135,6 +135,8 @@ GEM
     erubis (2.7.0)
     et-orbi (1.2.11)
       tzinfo
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-aarch64-linux-musl)
     ffi (1.17.2-arm-linux-gnu)
@@ -485,6 +487,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.4)
   debug
   devise
+  faker
   hamlit
   hamlit-rails
   html2haml
