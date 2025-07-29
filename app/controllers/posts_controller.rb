@@ -1,7 +1,13 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:index, :new, :create]
+
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post
+              .left_joins(:likes)
+              .where('posts.created_at >= ?', 24.hours.ago)
+              .group('posts.id')
+              .order('COUNT(likes.id) DESC')
+              .limit(5)
   end
 
   def show
