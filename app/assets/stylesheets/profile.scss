@@ -14,7 +14,6 @@ $image_size: variables.$avatar-l;
     img {
       width: $image_size;
       height: $image_size;
-      border-radius: 50%;
       object-fit: cover;
 
       border: 1px solid variables.$pink-dark;

@@ -1,0 +1,32 @@
+@use 'variables';
+
+$image_size: variables.$avatar-m;
+
+.follow_list {
+  width: 100%;
+  padding: 20px 20px 30px;
+  margin-top: 10px;
+  border-bottom: 1px solid variables.$gray-brilliant;
+  display: flex;
+  gap: 20px;
+
+  .follow_avatar {
+    img {
+      width: $image_size;
+      height: $image_size;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .follow_info {
+    .follow_user {
+      margin-bottom: 5px;
+    }
+
+    .follow_visit {
+      color: variables.$gray-dark;
+      font-size: variables.$font-md;
+    }
+  }
+}
