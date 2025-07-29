@@ -1,7 +1,24 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:index, :new, :create]
+
   def index
-    @posts = Post.all.order(created_at: :desc)
+    followed_posts = Post
+      .where(user_id: current_user.following_ids)
+      .includes(:user, :likes)
+
+    hot_posts = Post
+      .left_joins(:likes)
+      .where('posts.created_at >= ?', 24.hours.ago)
+      .group('posts.id')
+      .order('COUNT(likes.id) DESC')
+      .limit(5)
+      .includes(:user, :likes)
+
+    @posts = (followed_posts + hot_posts)
+      .uniq(&:id)
+      .sort_by(&:created_at)
+      .reverse
+      .take(5)
   end
 
   def show
