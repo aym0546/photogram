@@ -21,6 +21,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow_list
+    @user = User.find(params[:id])
+    if params[:type] == 'followers'
+      @title = 'Followers'
+      @users = @user.followers
+    else
+      @title = 'Followings'
+      @users = @user.followings
+    end
+
+    render 'follow_list', locals: { title: @title, users: @users }
+
+  end
+
   private
 
   def set_user
