@@ -135,6 +135,11 @@ GEM
     erubis (2.7.0)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.5.4)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.0)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -487,6 +492,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.4)
   debug
   devise
+  factory_bot_rails
   faker
   hamlit
   hamlit-rails
