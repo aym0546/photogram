@@ -1,0 +1,14 @@
+.container
+  .card
+    .heading
+      = title
+    - users.each do |user|
+      = link_to user_path(user.id) do
+        .follow_list
+          .follow_avatar
+            = image_tag user.avatar
+          .follow_info
+            .follow_user
+              = user.account
+            .follow_visit
+              Last seen 3 hours ago

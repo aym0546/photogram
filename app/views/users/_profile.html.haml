@@ -1,0 +1,57 @@
+- relationship_id = current_user.relationship_with(user) if !is_mine
+- is_following = current_user.following?(user) if !is_mine
+
+.container{ data: (!is_mine ? {
+  controller: 'follow',
+  follow_user_id_value: user.id,
+  follow_followed_value: is_following
+} : {}) }
+
+  - if !is_mine
+    .nav-right
+      %span{ data: {
+        action: 'click->follow#toggleFollow',
+        follow_target: 'span',
+        url: is_following && relationship_id.present? ? relationship_path(relationship_id) : relationships_path,
+        method: is_following && relationship_id.present? ? 'DELETE' : 'POST'
+      } }
+        = is_following ? 'UnFollow' : 'Follow'
+
+  - if is_mine
+    .nav-right
+      = link_to 'Log out', destroy_user_session_path, method: :delete
+
+  .card
+    .heading
+      = user.account
+
+    .user_info
+      .avatar{ data: (is_mine ? { controller: 'avatar-update', user_id: user.id } : {}) }
+        = image_tag user.avatar_img, (is_mine ? { id: 'avatar-preview', data: { action: 'click->avatar-update#triggerFileInput', avatar_update_target: 'preview' } } : {})
+
+        - if is_mine
+          = form_with url: '#', html: { id: 'avatar-form', enctype: 'multipart/form-data' }, local: true do
+            = file_field_tag :avatar, id: 'avatar-input', class: 'offscreen', data: { action: 'change->avatar-update#uploadAvatar', avatar_update_target: 'input' }
+
+      .achievement
+        .block
+          .count
+            = user.posts.count
+          .section
+            Posts
+        = link_to followers_user_path(user) do
+          .block
+            .count{ data: { follow_target: 'followerCount' } }
+              = user.followers.count
+            .section
+              Followers
+        = link_to followings_user_path(user) do
+          .block
+            .count
+              = user.followings.count
+            .section
+              Following
+
+    .user_posts
+      - user.posts.order(created_at: :desc).each do |post|
+        = render 'commons/image_grid', post: post
