@@ -1,4 +1,1 @@
-- if current_user == @user
-  = render 'own_profile', user: @user
-- else
-  = render 'other_profile', user: @user
+= render 'profile', user: @user, is_mine: current_user == @user

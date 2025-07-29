@@ -15,10 +15,14 @@ Rails.application.routes.draw do
   get '/user', to: 'users#me', as: :my_profile
   patch '/user', to: 'users#update', as: :update_my_profile
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :followers, to: 'users#follow_list', defaults: { type: 'followers' }
+      get :followings, to: 'users#follow_list', defaults: { type: 'followings' }
+    end
+  end
 
   resources :relationships, only: [:create, :destroy]
-  get 'users/:id/relationship', to: 'relationships#show', as: :user_relationship
 
   resources :posts, only: [:show, :new, :create] do
     resources :comments, only: [:index, :create]
