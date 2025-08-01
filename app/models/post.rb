@@ -47,7 +47,7 @@ class Post < ApplicationRecord
     end
   end
 
-def images_required
+  def images_required
     unless images.attached?
       errors.add(:images, '：1枚以上の画像をアップロードしてください')
     end

@@ -28,10 +28,17 @@ FactoryBot.define do
       )
     end
 
-    # 画像複数
+    # 画像なし
+    trait :without_images do
+      after(:build) do |post|
+        post.images.detach
+      end
+    end
+
+    # 画像複数（デフォルトと合わせて計８枚）
     trait :with_multiple_images do
       after(:build) do |post|
-        3.times do |i|
+        7.times do |i|
           file_path = Rails.root.join('spec/fixtures/files/test-image.png')
           post.images.attach(
             io: File.open(file_path),
