@@ -19,15 +19,13 @@ FactoryBot.define do
     association :user
 
     # 画像ひとつ
-    trait :with_image do
-      after(:build) do |post|
-        file_path = Rails.root.join('spec/fixtures/files/test-image.png')
-        post.images.attach(
-          io: File.open(file_path),
-          filename: 'test-image.png',
-          content_type: 'image/png'
-        )
-      end
+    after(:build) do |post|
+      file_path = Rails.root.join('spec/fixtures/files/test-image.png')
+      post.images.attach(
+        io: File.open(file_path),
+        filename: 'test-image.png',
+        content_type: 'image/png'
+      )
     end
 
     # 画像複数
