@@ -75,4 +75,8 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.before(:suite) { Warden.test_mode! }
   config.after(:each) { Warden.test_reset! }
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome
+  end
 end
