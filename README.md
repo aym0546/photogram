@@ -19,7 +19,10 @@ Ruby on Rails と Stimulus を使って開発中の、シンプルな SNS アプ
   - 投稿キャプション：最大400文字
   - 投稿画像：JPEG/PNG/GIFのみ・最大5MB・最大8枚まで
   - アバター画像：JPEG/PNG/GIFのみ・最大5MB
-- RSpec によるモデル単体テストを実装済み
+- RSpec によるモデル・リクエスト・システムのテストを実装済み
+
+## 🔗 本番環境（Heroku）
+- https://photogram-2504bcefb199.herokuapp.com/
 
 ## 🛠 セットアップ手順
 
@@ -43,6 +46,8 @@ bin/rails server
 - Stimulus を活用して非同期UIを構築（comments, likes, avatar, follow など）
 - 投稿一覧取得（PostsController#index）では、フォロー中の投稿 + ホット投稿を合成して新着順に表示
 - モデルスペック（spec/models/）にてバリデーションをしっかり検証
+- Request spec を用いたAPI動作確認（spec/requests/）
+- System spec によるブラウザUIテスト（spec/system/）
 - FactoryBot + Faker + 画像フィクスチャで信頼性の高いテストを構築
 
 ## 🧪 テスト実行方法
@@ -51,8 +56,8 @@ bin/rails server
 bundle exec rspec
 ```
 
-投稿・ユーザー・コメントモデルのバリデーションに関するテストが実行されます。
-※メンション通知メール機能は今後の拡張予定
+- モデル・リクエスト・システムに対するテストが実行されます
+- 投稿・ユーザー・コメントモデルのバリデーションもカバーしています
 
 ## 📁 主な構成
 - app/controllers — 各種コントローラー
@@ -60,6 +65,8 @@ bundle exec rspec
 - app/javascript/utils/flash.js — 全画面共通のフラッシュ通知用ユーティリティ
 - spec/factories — FactoryBot によるテストデータ定義
 - spec/fixtures/files — JPEG/PNG/GIF/不正画像などの画像ファイル（テスト用）
+- spec/requests/ — 認証や投稿操作などのAPI仕様を網羅
+- spec/system/ — 実際のUI操作による統合テスト
 
 ## 🙌 フィードバック・貢献
 
