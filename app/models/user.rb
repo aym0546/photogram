@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, host: 'http://localhost:3000') : nil
+    avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, host: ENV.fetch('DEFAULT_URL_HOST', 'http://localhost:3000')) : nil
   end
 
 end

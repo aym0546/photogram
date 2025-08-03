@@ -1,0 +1,16 @@
+{
+  "name": "Photogram",
+  "description": "This is Photo blog app",
+  "keywords": [],
+  "website": "",
+  "repository": "https://github.com/aym0546/photogram",
+  "env": {},
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }, {
+    "url": "heroku/ruby"
+  }]
+}
