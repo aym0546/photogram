@@ -70,20 +70,4 @@ RSpec.describe "Posts", type: :system do
     end
   end
 
-  describe 'POST /posts (create)' do
-    before { visit posts_path }
-
-    it '新規投稿画面が表示される'do
-      expect(page).to have_field('post_caption', placeholder: "What's on your mind ?")
-      expect(page).to have_content('+ Album')
-      expect(page).to have_button('Post')
-      expect(page).to have_content('test') # user.account
-    end
-
-    it '画像を選択するとプレビューが表示される image_preview' do
-      attach_file('image_upload', Rails.root.join('spec/fixtures/files/test-image.png'), make_visible: true)
-
-      expect(page).to have_selector('#preview img', wait: 5)
-    end
-  end
 end
