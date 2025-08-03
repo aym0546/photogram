@@ -9,6 +9,9 @@ export default class extends Controller {
 
   connect() {
     console.log('AvatarUpdateController connected');
+    this.csrfToken = document
+      .querySelector('meta[name="csrf-token"]')
+      ?.getAttribute('content');
   }
 
   triggerFileInput() {
@@ -25,8 +28,7 @@ export default class extends Controller {
     axios
       .patch('/user', formData, {
         headers: {
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
-            .content,
+          'X-CSRF-Token': this.csrfToken,
           'Content-Type': 'multipart/form-data',
         },
       })
