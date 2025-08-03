@@ -80,6 +80,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'faker'
+  gem 'rails-controller-testing'
 end
 
 gem "jsbundling-rails", "~> 1.3"

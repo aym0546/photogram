@@ -41,8 +41,6 @@ class PostsController < ApplicationController
 
   private
 
-  # @post.image.attach(params[:images])：画像追加
-  # @post.image.attached?：画像が添付されているか
   def post_params
     params.expect(post: [ :user_id, :caption, images: [] ])
   end

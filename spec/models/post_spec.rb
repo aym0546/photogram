@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  caption    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_posts_on_user_id  (user_id)
+#
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
@@ -23,7 +38,7 @@ RSpec.describe Post, type: :model do
     end
 
     it '画像の拡張子が PNG の場合は有効' do
-      post = build(:post, :with_image)
+      post = build(:post)
       expect(post).to be_valid
     end
 
@@ -50,23 +65,21 @@ RSpec.describe Post, type: :model do
       expect(post.errors[:images]).to include('：5MB 以下のファイルのみアップロード可能です')
     end
 
-    it '8枚以下 の画像枚数の場合は有効' do
-      post = build(:post)
+    it '画像が添付されていない場合は無効' do
+      post = build(:post, :without_images)
 
-      8.times do |i|
-        file_path = Rails.root.join('spec/fixtures/files/test-image.png')
-        post.images.attach(
-          io: File.open(file_path),
-          filename: "test-image_#{i}.png",
-          content_type: 'image/png'
-        )
-      end
+      post.valid?
+      expect(post.errors[:images]).to include('：1枚以上の画像をアップロードしてください')
+    end
+
+    it '8枚以下 の画像枚数の場合は有効' do
+      post = build(:post, :with_multiple_images)
 
       expect(post).to be_valid
     end
 
     it '9枚以上 の画像枚数の場合は無効' do
-      post = build(:post)
+      post = build(:post, :without_images)
 
       9.times do |i|
         file_path = Rails.root.join('spec/fixtures/files/test-image.png')

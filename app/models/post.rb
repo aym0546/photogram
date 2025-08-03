@@ -23,6 +23,7 @@ class Post < ApplicationRecord
 
   validates :caption, length: { maximum: 400 }
 
+  validate :images_required
   validate :images_content_type
   validate :images_size
   validate :images_count
@@ -43,6 +44,12 @@ class Post < ApplicationRecord
       "#{first_user} liked your post"
     else
       "#{first_user} and #{count - 1} other#{'s' if count > 2} liked this post"
+    end
+  end
+
+  def images_required
+    unless images.attached?
+      errors.add(:images, '：1枚以上の画像をアップロードしてください')
     end
   end
 
